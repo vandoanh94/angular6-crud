@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { ListFilesComponent } from './list-files/list-files.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ListFilesService } from './list-files/list-files.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { ListFilesService } from './list-files/list-files.service';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule.forRoot(),
+    FormsModule
   ],
   providers: [ListFilesService],
   bootstrap: [AppComponent]

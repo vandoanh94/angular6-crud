@@ -1,13 +1,38 @@
-<p>
-  list-files works!
-  <button (click)="getListFiles()">Get List</button>
-  <button (click)="deleteFile()">Delete File</button>
-  <li *ngFor="let file of listFiles">
-    {{file.name}} 
-  </li>
-</p>
 <div>
   <input type="file" #fileInput placeholder="Upload file..." />
   <button type="button" (click)="upload()">Upload</button>
 </div>
 
+
+<div class="container files-block">
+  <div class="row">
+    <div class="col-sm-8 files-block--left flex-container wrap">
+      <li class="flex-item" *ngFor="let file of listFiles">
+        <img id={{file.id}} class="file-item-img" (click)="clickItem(file)" src={{file.url}} alt="Smiley face">
+      </li>
+    </div>
+    <div class="col-sm-4 files-block--right">
+      <h5>Chi Tiết File</h5>
+      <div class="row">
+          <label class="control-label col-sm-3 pull-right">Id</label>
+          <div class="col-sm-9">          
+            <input type="text" class="form-control" [ngModel]="fileSelected.id" readonly>
+          </div>
+          <label class="control-label col-sm-3 pull-right">Name</label>
+          <div class="col-sm-9">          
+            <input type="text" class="form-control" [(ngModel)]="fileSelected.name">
+          </div>
+          <label class="control-label col-sm-3 pull-right">Localtion</label>
+          <div class="col-sm-9">          
+            <input type="text" class="form-control" [(ngModel)]="fileSelected.location">
+          </div>
+          <label class="control-label col-sm-3 pull-right">Ulr</label>
+          <div class="col-sm-9">          
+            <input type="text" class="form-control" [(ngModel)]="fileSelected.url">
+          </div>
+      </div>
+      <button (click)="downloadFile(fileSelected)">Save File</button>
+      <button (click)="deleteFile(fileSelected)">Delete File</button>
+    </div>
+  </div>
+</div>

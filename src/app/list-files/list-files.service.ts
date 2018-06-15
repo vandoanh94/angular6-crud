@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../core/url.constant';
 import { catchError, map, tap } from 'rxjs/operators';
-import { IFiles, Files } from './list-files.model';
+import { IFiles, Files, File } from './list-files.model';
 import { Observable } from 'rxjs';
 
 
@@ -36,6 +36,11 @@ export class ListFilesService {
   public deleteFile(id): Observable<any> {
     const url = `${environment.apiUrl}files/` + id;
     return this.httpClient.delete(url);
+  }
+
+  public downloadFile(file:File) {
+    const url = `${environment.apiUrl}files/`+file.id+"/"+file.name;
+    window.open(url);
   }
 
 }
