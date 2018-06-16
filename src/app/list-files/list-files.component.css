@@ -1,15 +1,15 @@
 .files-block{
-    border: 1px solid red;
+    border: 1px solid rgb(185, 185, 185);
 }
 
 .files-block--left{
-    border: 1px solid rgb(98, 0, 255);
+    border: 1px solid rgb(187, 187, 187);
     height: 500px;
     overflow-y: scroll;
 }
 
 .files-block--right{
-    border: 1px solid rgb(102, 255, 0);
+    border: 1px solid rgb(192, 192, 192);
     background-color: rgb(235, 235, 235);
 }
 
@@ -18,6 +18,9 @@
     /* border: 1px solid blue; */
     width: 100%;  /* Or whatever */
     height: 100%; /* Or whatever */
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px 18px #888888;
 }
 
 .flex-container {
@@ -83,4 +86,36 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #555; 
+}
+
+.file-detail{
+    height: 70px;
+    widows: 70px;
+}
+
+.file-detail-left{
+    margin: auto;
+    /* border: 1px solid blue; */
+    height: 100%; /* Or whatever */
+}
+.file-detail-right--but{
+    font-size: 12px;
+    margin: 0px !important;
+}
+
+.file-detail-right{
+    font-size: 12px;
+    margin: 0px !important;
+    white-space: nowrap; 
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.file-detail-right:hover {
+    overflow: visible;
+}
+
+.pull-right{
+    float: right !important;
 }

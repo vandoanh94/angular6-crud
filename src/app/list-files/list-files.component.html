@@ -1,38 +1,51 @@
-<div>
-  <input type="file" #fileInput placeholder="Upload file..." />
-  <button type="button" (click)="upload()">Upload</button>
-</div>
-
-
+<div class="container">
+    <input type="file" #fileInput placeholder="Upload file..." />
+    <button type="button" class="btn btn-primary" (click)="upload()">Upload</button>
+  </div>
 <div class="container files-block">
   <div class="row">
     <div class="col-sm-8 files-block--left flex-container wrap">
       <li class="flex-item" *ngFor="let file of listFiles">
-        <img id={{file.id}} class="file-item-img" (click)="clickItem(file)" src={{file.url}} alt="Smiley face">
+        <img id={{file.id}} class="file-item-img" (click)="clickItem(file)" src={{file.url}}>
       </li>
     </div>
     <div class="col-sm-4 files-block--right">
       <h5>Chi Tiết File</h5>
-      <div class="row">
-          <label class="control-label col-sm-3 pull-right">Id</label>
+      <div class="row" *ngIf="fileSelected.id">
+          <div class="col-sm-4 file-detail">
+              <img id={{fileSelected.id}} class="file-detail-left" (click)="clickItem(file)" src={{fileSelected.url}}>
+          </div>
+          <div class="col-sm-8">
+            <p class="file-detail-right">ID: {{fileSelected.id}}</p>
+            <p class="file-detail-right">Name: {{fileSelected.name}}</p>
+            <p class="file-detail-right">Size: {{fileSelected.size}}</p>
+            <p class="file-detail-right">Location: {{fileSelected.location}}</p>
+          </div>
+            <button type="button" class="btn btn-link file-detail-right--but" (click)="editFile(fileSelected)">Sửa ảnh</button>
+            <button type="button" class="btn btn-link file-detail-right--but" (click)="deleteFile(fileSelected)">Xóa vĩnh viễn</button>
+            <button type="button" class="btn btn-link file-detail-right--but" (click)="downloadFile(fileSelected)">Download</button>
+      </div>
+      <div class="row" *ngIf="fileSelected.edit">
+          <label class="control-label col-sm-3">Id</label>
           <div class="col-sm-9">          
             <input type="text" class="form-control" [ngModel]="fileSelected.id" readonly>
           </div>
-          <label class="control-label col-sm-3 pull-right">Name</label>
+          <label class="control-label col-sm-3">Name</label>
           <div class="col-sm-9">          
             <input type="text" class="form-control" [(ngModel)]="fileSelected.name">
           </div>
-          <label class="control-label col-sm-3 pull-right">Localtion</label>
+          <label class="control-label col-sm-3">Localtion</label>
           <div class="col-sm-9">          
             <input type="text" class="form-control" [(ngModel)]="fileSelected.location">
           </div>
-          <label class="control-label col-sm-3 pull-right">Ulr</label>
+          <label class="control-label col-sm-3">Ulr</label>
           <div class="col-sm-9">          
             <input type="text" class="form-control" [(ngModel)]="fileSelected.url">
           </div>
+          <div class="col">
+              <button type="button" class="btn btn-success" (click)="updateFile(fileSelected)">Update</button>
+          </div>
       </div>
-      <button (click)="downloadFile(fileSelected)">Save File</button>
-      <button (click)="deleteFile(fileSelected)">Delete File</button>
     </div>
   </div>
 </div>

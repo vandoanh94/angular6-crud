@@ -30,6 +30,7 @@ export class File {
     object_type: string;
     last_modified: string;
     modified_by: string;
+    edit:boolean = false;
 }
 
 

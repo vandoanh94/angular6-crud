@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../core/url.constant';
 import { catchError, map, tap } from 'rxjs/operators';
-import { IFiles, Files, File } from './list-files.model';
+import { Files, File } from './list-files.model';
 import { Observable } from 'rxjs';
 
 
@@ -22,10 +22,9 @@ export class ListFilesService {
     }));
   }
 
-  public updateFile(id: string, body: IFiles): Observable<any> {
-    const url = `${environment.apiUrl}files/` + id;
-
-    return this.httpClient.put(url, body);
+  public updateFile(file:File): Observable<any> {
+    const url = `${environment.apiUrl}files/` + file.id;
+    return this.httpClient.put(url, file);
   }
 
   public uploadFile(file): Observable<any> {

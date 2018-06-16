@@ -66,6 +66,13 @@ export class ListFilesComponent implements OnInit {
     if(file.id){
       this.listFilesService.downloadFile(file);
     }
-    
+  }
+
+  public updateFile(file:File){
+    this.listFilesService.updateFile(file).subscribe();
+  }
+
+  public editFile(file:File){
+    file.edit = true;
   }
 }
