@@ -26,7 +26,8 @@ export class ListFilesComponent implements OnInit {
     this.listFilesService.getListFiles().subscribe((res: Files) => {
       this.listFiles = res.list;
       console.log("getfile",res);
-    });
+    },
+    err =>console.log(err));
   }
 
   private upload(): void {
@@ -37,7 +38,8 @@ export class ListFilesComponent implements OnInit {
       this.listFilesService.uploadFile(formData).subscribe(res => {
         console.log('upload', res);
         this.getListFiles();
-      });
+      },
+      err =>console.log(err));
     }
   }
 
@@ -46,7 +48,8 @@ export class ListFilesComponent implements OnInit {
       console.log('delete', res);
       this.getListFiles();
       this.fileSelected = new File();
-    });
+    },
+    err =>console.log(err));
   }
 
   public clickItem(item:File){
@@ -69,7 +72,7 @@ export class ListFilesComponent implements OnInit {
   }
 
   public updateFile(file:File){
-    this.listFilesService.updateFile(file).subscribe();
+    this.listFilesService.updateFile(file).subscribe(res=>{}, err =>console.log(err));
   }
 
   public editFile(file:File){
