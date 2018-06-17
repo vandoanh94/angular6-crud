@@ -1,15 +1,27 @@
-.files-block{
+.row{
+    padding: 0 !important;
+}
+.dialog-block{
     border: 1px solid rgb(185, 185, 185);
 }
 
+.button1 {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50; /* Green */
+}
+.file-item-img-small{
+    border:2px solid #4CAF50;
+    width: 40px;
+    height: 40px;
+}
 .files-block--left{
-    border: 1px solid rgb(187, 187, 187);
-    height: 500px;
+    height: 450px;
     overflow-y: scroll;
+    padding: 0 ;
 }
 
 .files-block--right{
-    border: 1px solid rgb(192, 192, 192);
     background-color: rgb(235, 235, 235);
 }
 
@@ -18,16 +30,14 @@
     /* border: 1px solid blue; */
     width: 100%;  /* Or whatever */
     height: 100%; /* Or whatever */
-    border: 1px solid;
-    padding: 10px;
-    box-shadow: 5px 10px 18px #888888;
+    border: 1px solid rgb(231, 231, 231);
+    padding: 0 !important;
 }
 
 .flex-container {
     padding: 0;
     margin: 0;
     list-style: none;
-    border: 1px solid silver;
     -ms-box-orient: horizontal;
     display: -webkit-box;
     display: -moz-box;
@@ -59,8 +69,6 @@
     padding: 5px;
     width: 120px;
     height: 120px;
-    margin: 10px;
-    
     line-height: 100px;
     color: white;
     font-weight: bold;
@@ -96,7 +104,8 @@
 .file-detail-left{
     margin: auto;
     /* border: 1px solid blue; */
-    height: 100%; /* Or whatever */
+    height: 60px; /* Or whatever */
+    width: 60px;
 }
 .file-detail-right--but{
     font-size: 12px;
@@ -125,4 +134,85 @@
     -ms-transform: scaleX(-1) rotate(-35deg); /* IE 9 */
     -webkit-transform: scaleX(-1) rotate(-35deg); /* Chrome, Safari, Opera */
     transform: scaleX(-1) rotate(-35deg);
+  }
+
+  
+  
+  .dropdown {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .dd-button {
+    font-size: small;
+    display: inline-block;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 2px 25px 2px 2px;
+    background-color: #ffffff;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  
+  .dd-button:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid black;
+  }
+  
+  .dd-button:hover {
+    background-color: #eeeeee;
+  }
+  
+  
+  .dd-input {
+    display: none;
+  }
+  
+  .dd-menu {
+    position: absolute;
+    top: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0;
+    margin: 2px 0 0 0;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+    background-color: #ffffff;
+    list-style-type: none;
+  }
+  
+  .dd-input + .dd-menu {
+    display: none;
+  } 
+  
+  .dd-input:checked + .dd-menu {
+    display: block;
+  } 
+  
+  .dd-menu li {
+    padding: 10px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  
+  .dd-menu li:hover {
+    background-color: #f6f6f6;
+  }
+  
+  .dd-menu li a {
+    display: block;
+    margin: -10px -20px;
+    padding: 10px 20px;
+  }
+  
+  .dd-menu li.divider{
+    padding: 0;
+    border-bottom: 1px solid #cccccc;
   }

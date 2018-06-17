@@ -1,49 +1,131 @@
 <div class="container">
-    <input type="file" #fileInput placeholder="Upload file..." />
-    <button type="button" class="btn btn-primary" (click)="upload()">Upload</button>
-  </div>
-<div class="container files-block">
-  <div class="row">
-    <div class="col-sm-8 files-block--left flex-container wrap">
-      <li class="flex-item" *ngFor="let file of listFiles">
-        <img id={{file.id}} class="file-item-img" (click)="clickItem(file)" src={{file.url}}>
-      </li>
-    </div>
-    <div class="col-sm-4 files-block--right">
-      <h5>Chi Tiết File</h5>
-      <div class="row" *ngIf="fileSelected.id">
-          <div class="col-sm-4 file-detail">
-              <img id={{fileSelected.id}} class="file-detail-left" (click)="clickItem(file)" src={{fileSelected.url}}>
-          </div>
-          <div class="col-sm-8">
-            <p class="file-detail-right">ID: {{fileSelected.id}}</p>
-            <p class="file-detail-right">Name: {{fileSelected.name}}</p>
-            <p class="file-detail-right">Size: {{fileSelected.size}}</p>
-            <p class="file-detail-right">Location: {{fileSelected.location}}</p>
-          </div>
-            <button type="button" class="btn btn-link file-detail-right--but" (click)="editFile(fileSelected)">Sửa ảnh</button>
-            <button type="button" class="btn btn-link file-detail-right--but" (click)="deleteFile(fileSelected)">Xóa vĩnh viễn</button>
-            <button type="button" class="btn btn-link file-detail-right--but" (click)="downloadFile(fileSelected)">Download</button>
+  <div class="dialog-block">
+    <div class="row" style="margin: 0 !important; width: 100%;">
+      <div class="col-2" style="background-color: rgb(235, 235, 235);">
+        <h6>Thêm Media</h6>
+        <a href="*">Tạo bộ sưu tập</a>
+        <a href="*">Tạo danh sách Audio</a>
+        <a href="*">Tạo danh sách phát Video</a>
+        <a href="*">Ảnh đại điện</a>
+        <hr>
+        <a href="*">Chèn từ URL</a>
       </div>
-      <div class="row" *ngIf="fileSelected.edit">
-          <label class="control-label col-sm-3">Id</label>
-          <div class="col-sm-9">          
-            <input type="text" class="form-control" [ngModel]="fileSelected.id" readonly>
+      <div class="col-10" style="padding: 0 !important;">
+        <div>
+          <h4>&nbsp;&nbsp;&nbsp;Thêm Media</h4>
+        </div>
+        <div class="row" style="margin: 0 !important; width: 100%;">
+          <ul class="nav nav-tabs row" style="margin: 0 !important; width: 100%;">
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{active: showUpload === true}" (click)="showUploadFun()" style="height: 35px;" href="#">Tải tập tin lên</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{active: showLib === true}" style="height: 35px;" href="#" (click)="showLibFun()">Thư viện</a>
+            </li>
+          </ul>
+
+
+          <div class="col-sm-8" style="padding: 0 !important; margin-top: 4px;">
+            <div class="row" style="margin-left: 5px;" *ngIf="showLib">
+              <div class="col-6">
+                <label class="dropdown">
+                  <div class="dd-button">
+                    &nbsp;Tải cả&nbsp;
+                  </div>
+                  <input type="checkbox" class="dd-input" id="test">
+                  <ul class="dd-menu">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                  </ul>
+                </label>
+                <label>&nbsp;&nbsp;</label>
+                <label class="dropdown">
+                  <div class="dd-button">
+                    Tất cả các ngày
+                  </div>
+                  <input type="checkbox" class="dd-input" id="test">
+                  <ul class="dd-menu">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                  </ul>
+                </label>
+              </div>
+              <div class="col-6 text-md-right" style="margin-left: -5px;">
+                <div class="form-group">
+                  <input style="height: 25px; width: 150px; border-radius: 4px;" placeholder="Tìm các mục media..." type="text" id="usr">
+                </div>
+              </div>
+            </div>
+            <div class="flex-container wrap files-block--left" *ngIf="showUpload">
+              <div>
+                <input type="file" #fileInput placeholder="Upload file..." />
+                <button type="button" class="btn btn-primary" (click)="upload()">Upload</button>
+              </div>
+
+            </div>
+
+            <div class="flex-container wrap files-block--left" *ngIf="showLib">
+              <li class="flex-item" *ngFor="let file of listFiles">
+                <img id={{file.id}} class="file-item-img" (click)="clickItem(file)" src={{file.url}}>
+              </li>
+            </div>
           </div>
-          <label class="control-label col-sm-3">Name</label>
-          <div class="col-sm-9">          
-            <input type="text" class="form-control" [(ngModel)]="fileSelected.name">
+          <div class="col-sm-4 files-block--right">
+            <h5>Chi Tiết File</h5>
+            <div class="row" *ngIf="fileSelected.id">
+              <div class="col-sm-4 file-detail">
+                <img id={{fileSelected.id}} class="file-detail-left" (click)="clickItem(file)" src={{fileSelected.url}}>
+              </div>
+              <div class="col-sm-8">
+                <p class="file-detail-right">ID: {{fileSelected.id}}</p>
+                <p class="file-detail-right">Name: {{fileSelected.name}}</p>
+                <p class="file-detail-right">Size: {{fileSelected.size}}</p>
+                <p class="file-detail-right">Location: {{fileSelected.location}}</p>
+              </div>
+              <button type="button" class="btn btn-link file-detail-right--but" (click)="editFile(fileSelected)">Sửa ảnh</button>
+              <button type="button" class="btn btn-link file-detail-right--but" (click)="deleteFile(fileSelected)">Xóa vĩnh viễn</button>
+              <button type="button" class="btn btn-link file-detail-right--but" (click)="downloadFile(fileSelected)">Download</button>
+            </div>
+            <div class="row" *ngIf="fileSelected.edit">
+              <label class="control-label col-sm-3 text-md-right" style="padding: 0 !important;">Id</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" [ngModel]="fileSelected.id" readonly>
+              </div>
+              <label class="control-label col-sm-3 text-md-right" style="padding: 0 !important;">Ulr</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" [(ngModel)]="fileSelected.url">
+              </div>
+              <label class="control-label col-sm-3 text-md-right"style="padding: 0 !important;">Tiêu đề</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" [(ngModel)]="fileSelected.name">
+              </div>
+              <label class="control-label col-sm-3 text-md-right" style="padding: 0 !important;">Localtion</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" [(ngModel)]="fileSelected.location">
+              </div>
+              
+              <div class="col text-md-right" style="padding: 5px;">
+                <button type="button" class="btn btn-success" (click)="updateFile(fileSelected)">Update</button>
+              </div>
+            </div>
           </div>
-          <label class="control-label col-sm-3">Localtion</label>
-          <div class="col-sm-9">          
-            <input type="text" class="form-control" [(ngModel)]="fileSelected.location">
-          </div>
-          <label class="control-label col-sm-3">Ulr</label>
-          <div class="col-sm-9">          
-            <input type="text" class="form-control" [(ngModel)]="fileSelected.url">
-          </div>
-          <div class="col">
-              <button type="button" class="btn btn-success" (click)="updateFile(fileSelected)">Update</button>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-2">
+                    <p style="margin: 0px;">&nbsp;&nbsp;{{listFilesSelected.length}} đã được chọn</p>
+                    <button type="button" style="color: red;" class="btn btn-light" (click)="deleteSelectPics()">Xóa</button>
+                </div>
+                <div class="col-7">
+                    <a *ngFor="let pic of listFilesSelected"><img class="file-item-img-small" src={{pic.url}}/></a>
+                </div>
+                <div class="col-3 text-md-right">
+                    <button type="button" class="btn btn-primary">Chèn vào bài viết</button>
+                </div>
+                </div>
+            
           </div>
       </div>
     </div>

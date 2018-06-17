@@ -12,8 +12,10 @@ export class ListFilesComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
   public listFiles: Array<File> = new Array<File>();
   public listFilesSelected: Array<File> = new Array<File>();
-  public fileSelected:File = new File();
-  public borderItem = "3px solid blue";
+  public fileSelected: File = new File();
+  public borderItem = '3px solid blue';
+  public showLib = true;
+  public showUpload = false;
 
   constructor(private listFilesService: ListFilesService) {
     this.getListFiles();
@@ -25,9 +27,9 @@ export class ListFilesComponent implements OnInit {
   public getListFiles(): void {
     this.listFilesService.getListFiles().subscribe((res: Files) => {
       this.listFiles = res.list;
-      console.log("getfile",res);
+      console.log('getfile', res);
     },
-    err =>console.log(err));
+    err => console.log(err));
   }
 
   private upload(): void {
@@ -39,7 +41,7 @@ export class ListFilesComponent implements OnInit {
         console.log('upload', res);
         this.getListFiles();
       },
-      err =>console.log(err));
+      err => console.log(err));
     }
   }
 
@@ -49,33 +51,53 @@ export class ListFilesComponent implements OnInit {
       this.getListFiles();
       this.fileSelected = new File();
     },
-    err =>console.log(err));
+    err => console.log(err));
   }
 
-  public clickItem(item:File){
-    let element = document.getElementById(item.id);
-    if(element.style.border==this.borderItem){
-      element.style.border="";
+  public showLibFun() {
+    this.showLib = true;
+    this.showUpload = false;
+  }
+
+  public showUploadFun() {
+    this.showLib = false;
+    this.showUpload = true;
+  }
+
+  public clickItem(item: File) {
+    const element = document.getElementById(item.id);
+    if (element.style.border === this.borderItem) {
+      element.style.border = '';
       this.listFilesSelected.splice(this.listFilesSelected.indexOf(item), 1);
-    }
-    else{
-      element.style.border=this.borderItem;
+    } else {
+      element.style.border = this.borderItem;
       this.listFilesSelected.push(item);
       this.fileSelected = item;
     }
   }
 
-  public downloadFile(file:File) : void{
-    if(file.id){
+  public downloadFile(file: File): void {
+    if (file.id) {
       this.listFilesService.downloadFile(file);
     }
   }
 
-  public updateFile(file:File){
-    this.listFilesService.updateFile(file).subscribe(res=>{}, err =>console.log(err));
+  public updateFile(file: File) {
+    this.listFilesService.updateFile(file).subscribe(res => {}, err => console.log(err));
   }
 
-  public editFile(file:File){
+  public editFile(file: File) {
     file.edit = true;
+  }
+
+  public deleteSelectPics(): void {
+    this.listFilesSelected = new Array<File>();
+    this.fileSelected = new File();
+    this.listFiles.forEach(item => {
+      const element = document.getElementById(item.id);
+    if (element && element.style.border === this.borderItem) {
+      element.style.border = '';
+    }
+    });
   }
 }
